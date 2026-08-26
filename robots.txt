@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://REEMPLAZAR-USUARIO.github.io/sitemap.xml
+Sitemap: https://natashaUGC.github.io/sitemap.xml
