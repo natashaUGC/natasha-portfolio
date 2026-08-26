@@ -7,14 +7,14 @@
   <title>NE Studio — Natasha Esparza | Contenido UGC & Relaciones Comerciales</title>
   <meta name="description" content="Natasha Esparza — creadora de contenido UGC y estudiante de Relaciones Comerciales. Contenido auténtico de beauty, wellness y lifestyle para marcas." />
   <meta name="author" content="Natasha Esparza" />
-  <link rel="canonical" href="https://natashaUGC.github.io/" />
+  <link rel="canonical" href="https://REEMPLAZAR-USUARIO.github.io/" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="NE Studio — Natasha Esparza" />
   <meta property="og:description" content="Creadora de contenido UGC y estudiante de Relaciones Comerciales. Beauty, wellness & lifestyle content." />
   <meta property="og:image" content="assets/images/og-cover.jpg" />
-  <meta property="og:url" content="https://natashaUGC.github.io/" />
+  <meta property="og:url" content="https://REEMPLAZAR-USUARIO.github.io/" />
   <meta property="og:locale" content="es_MX" />
 
   <!-- Twitter / X Card -->
@@ -75,9 +75,9 @@
     <section class="hero" id="hero" aria-label="Presentación">
       <div class="hero-inner">
         <p class="eyebrow reveal">Creadora de contenido UGC</p>
-        <h1 class="hero-name reveal">
-          <span class="hero-name-line">Natasha</span>
-          <span class="hero-name-line hero-name-accent">Esparza</span>
+        <h1 class="hero-name" data-split-name aria-label="Natasha Esparza">
+          <span class="hero-name-line" data-split-target aria-hidden="true">Natasha</span>
+          <span class="hero-name-line hero-name-accent" data-split-target aria-hidden="true">Esparza</span>
         </h1>
         <p class="hero-tagline reveal">
           Contenido auténtico que conecta marcas con personas reales.
@@ -87,25 +87,23 @@
         </p>
 
         <div class="hero-actions reveal">
-          <a class="btn btn-primary" href="#portfolio">Ver mi contenido</a>
-          <a class="btn btn-ghost" href="#contact">Trabajemos juntas</a>
+          <a class="btn btn-primary" data-magnetic href="#portfolio">Ver mi contenido</a>
+          <a class="btn btn-ghost" data-magnetic href="#contact">Trabajemos juntas</a>
         </div>
       </div>
 
-      <div class="hero-portrait" aria-hidden="true">
+      <div class="hero-portrait" data-tilt>
         <!--
-          IMAGEN: Reemplazar por la fotografía principal de Natasha.
-          Ruta sugerida: assets/images/hero-portrait.jpg
-          Recomendado: retrato vertical, fondo simple, alta resolución.
-          Se usa aquí un marco decorativo mientras no exista el archivo final.
+          IMAGEN: Fotografía principal de Natasha.
+          Archivo: assets/images/hero-portrait.jpg
         -->
         <div class="portrait-frame">
           <img
             class="portrait-img"
             src="assets/images/hero-portrait.jpg"
             alt="Natasha Esparza, creadora de contenido UGC"
-            width="640"
-            height="800"
+            width="900"
+            height="1125"
             loading="eager"
             onerror="this.closest('.portrait-frame').classList.add('portrait-fallback')"
           />
@@ -119,12 +117,30 @@
       </a>
     </section>
 
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" data-marquee>
+        <span>Beauty&nbsp;·&nbsp;Wellness&nbsp;·&nbsp;Lifestyle&nbsp;·&nbsp;Contenido&nbsp;UGC&nbsp;·&nbsp;Relaciones&nbsp;Comerciales&nbsp;·&nbsp;</span>
+        <span>Beauty&nbsp;·&nbsp;Wellness&nbsp;·&nbsp;Lifestyle&nbsp;·&nbsp;Contenido&nbsp;UGC&nbsp;·&nbsp;Relaciones&nbsp;Comerciales&nbsp;·&nbsp;</span>
+      </div>
+    </div>
+
     <!-- ============ ABOUT ============ -->
     <section class="section about" id="about" aria-labelledby="about-title">
       <div class="section-inner about-grid">
         <div class="section-head">
           <p class="section-eyebrow">01 — Sobre mí</p>
           <h2 class="section-title" id="about-title">Who is Natasha</h2>
+        </div>
+
+        <div class="about-photo reveal" data-tilt data-tilt-strength="6">
+          <img
+            src="assets/images/about-portrait.jpg"
+            alt="Natasha Esparza sonriendo, retrato casual"
+            width="800"
+            height="1000"
+            loading="lazy"
+          />
         </div>
 
         <div class="about-body">
@@ -153,7 +169,7 @@
             </div>
             <div class="fact">
               <dt>Universidad</dt>
-              <dd>IPN ESCA</dd>
+              <dd>ESCA IPN</dd>
             </div>
           </dl>
         </div>
@@ -248,6 +264,32 @@
             <!-- IMAGEN: assets/images/portfolio-lifestyle.jpg -->
           </article>
         </div>
+
+        <div class="portfolio-links reveal">
+          <p class="specialization-label">Contenido reciente</p>
+          <ul class="link-list">
+            <li>
+              <a href="https://vt.tiktok.com/ZSVMu5Snr/" target="_blank" rel="noopener noreferrer">
+                Ver video 1 en TikTok <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://vt.tiktok.com/ZSVMuKeLH/" target="_blank" rel="noopener noreferrer">
+                Ver video 2 en TikTok <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://vt.tiktok.com/ZSVMuT1r3/" target="_blank" rel="noopener noreferrer">
+                Ver video 3 en TikTok <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://vt.tiktok.com/ZSVMHkC7j/" target="_blank" rel="noopener noreferrer">
+                Ver video 4 en TikTok <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -262,7 +304,7 @@
         <div class="timeline reveal">
           <div class="timeline-item">
             <h3>Relaciones Comerciales</h3>
-            <p class="timeline-meta">[UNIVERSIDAD] · [PERIODO]</p>
+            <p class="timeline-meta">ESCA IPN · [PERIODO]</p>
             <p>[DESCRIPCIÓN BREVE / CURSOS RELEVANTES]</p>
           </div>
         </div>
@@ -272,35 +314,47 @@
     <!-- ============ CONTACT ============ -->
     <section class="section contact" id="contact" aria-labelledby="contact-title">
       <div class="section-inner contact-grid">
-        <div class="section-head">
-          <p class="section-eyebrow">05 — Contacto</p>
-          <h2 class="section-title" id="contact-title">
-            "Creemos juntas algo inolvidable"
-          </h2>
+        <div class="contact-photo reveal" data-tilt data-tilt-strength="6">
+          <img
+            src="assets/images/contact-portrait.jpg"
+            alt="Natasha Esparza al aire libre en invierno"
+            width="800"
+            height="1000"
+            loading="lazy"
+          />
         </div>
 
-        <div class="contact-actions reveal">
-          <a class="btn btn-primary" href="mailto:natasha.esparza.ugc@gmail.com">
-            Escríbeme un correo
-          </a>
+        <div>
+          <div class="section-head">
+            <p class="section-eyebrow">05 — Contacto</p>
+            <h2 class="section-title" id="contact-title">
+              "Creemos juntas algo inolvidable"
+            </h2>
+          </div>
 
-          <ul class="social-list">
-            <li>
-              <a href="https://instagram.com/REEMPLAZAR" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Natasha Esparza (abre en una pestaña nueva)">
-                <span class="social-icon" aria-hidden="true">◎</span> Instagram
-              </a>
-            </li>
-            <li>
-              <a href="https://www.tiktok.com/@REEMPLAZAR" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Natasha Esparza (abre en una pestaña nueva)">
-                <span class="social-icon" aria-hidden="true">♪</span> TikTok
-              </a>
-            </li>
-            <li>
-              <a href="mailto:natasha.esparza.ugc@gmail.com">
-                <span class="social-icon" aria-hidden="true">✉</span> natasha.esparza.ugc@gmail.com
-              </a>
-            </li>
-          </ul>
+          <div class="contact-actions reveal">
+            <a class="btn btn-primary" data-magnetic href="mailto:natasha.esparza.ugc@gmail.com">
+              Escríbeme un correo
+            </a>
+
+            <ul class="social-list">
+              <li>
+                <a href="https://www.instagram.com/natash._.garcia/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Natasha Esparza (abre en una pestaña nueva)">
+                  <span class="social-icon" aria-hidden="true">◎</span> Instagram
+                </a>
+              </li>
+              <li>
+                <a href="https://www.tiktok.com/@nataashhhhh._" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Natasha Esparza (abre en una pestaña nueva)">
+                  <span class="social-icon" aria-hidden="true">♪</span> TikTok
+                </a>
+              </li>
+              <li>
+                <a href="mailto:natasha.esparza.ugc@gmail.com">
+                  <span class="social-icon" aria-hidden="true">✉</span> natasha.esparza.ugc@gmail.com
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -313,8 +367,8 @@
       <p class="footer-tagline">Contenido auténtico que conecta marcas con personas reales.</p>
       <nav aria-label="Redes sociales">
         <ul class="footer-social">
-          <li><a href="https://instagram.com/REEMPLAZAR" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-          <li><a href="https://www.tiktok.com/@REEMPLAZAR" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+          <li><a href="https://www.instagram.com/natash._.garcia/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://www.tiktok.com/@nataashhhhh._" target="_blank" rel="noopener noreferrer">TikTok</a></li>
           <li><a href="mailto:natasha.esparza.ugc@gmail.com">Email</a></li>
         </ul>
       </nav>
