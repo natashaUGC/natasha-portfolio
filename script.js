@@ -64,14 +64,85 @@
   }
 
   /* ---------------------------------------------------------
+     Hero name — split into per-letter <span> elements so each
+     letter can animate in with a staggered delay.
+     Built entirely with createElement/textContent — no innerHTML.
+  --------------------------------------------------------- */
+  var prefersReducedMotionEarly = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+
+  if (!prefersReducedMotionEarly) {
+    document.querySelectorAll('[data-split-target]').forEach(function (line, lineIndex) {
+      var text = line.textContent;
+      // Clear the line, then rebuild it out of individual letter spans.
+      while (line.firstChild) line.removeChild(line.firstChild);
+
+      // Offset each subsequent line so the cascade reads top-to-bottom
+      // instead of every line animating in unison.
+      var lineOffset = lineIndex * (text.length + 3);
+
+      text.split('').forEach(function (char, charIndex) {
+        var span = document.createElement('span');
+        span.className = 'letter';
+        span.style.setProperty('--i', String(lineOffset + charIndex));
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        line.appendChild(span);
+      });
+    });
+  }
+
+  /* ---------------------------------------------------------
+     Tilt effect — subtle 3D rotation following the pointer.
+     Skipped entirely for touch input and reduced-motion users.
+  --------------------------------------------------------- */
+  var supportsHover = window.matchMedia('(hover: hover)').matches;
+
+  if (!prefersReducedMotionEarly && supportsHover) {
+    document.querySelectorAll('[data-tilt]').forEach(function (el) {
+      var strength = Number(el.getAttribute('data-tilt-strength')) || 10;
+
+      el.addEventListener('pointermove', function (event) {
+        var rect = el.getBoundingClientRect();
+        var px = (event.clientX - rect.left) / rect.width - 0.5;
+        var py = (event.clientY - rect.top) / rect.height - 0.5;
+        el.style.setProperty('--ry', (px * strength).toFixed(2) + 'deg');
+        el.style.setProperty('--rx', (-py * strength).toFixed(2) + 'deg');
+      });
+
+      el.addEventListener('pointerleave', function () {
+        el.style.setProperty('--rx', '0deg');
+        el.style.setProperty('--ry', '0deg');
+      });
+    });
+  }
+
+  /* ---------------------------------------------------------
+     Magnetic buttons — nudge toward the pointer on hover.
+  --------------------------------------------------------- */
+  if (!prefersReducedMotionEarly && supportsHover) {
+    document.querySelectorAll('[data-magnetic]').forEach(function (el) {
+      el.addEventListener('pointermove', function (event) {
+        var rect = el.getBoundingClientRect();
+        var mx = (event.clientX - rect.left - rect.width / 2) * 0.25;
+        var my = (event.clientY - rect.top - rect.height / 2) * 0.25;
+        el.style.setProperty('--mx', mx.toFixed(1) + 'px');
+        el.style.setProperty('--my', my.toFixed(1) + 'px');
+      });
+
+      el.addEventListener('pointerleave', function () {
+        el.style.setProperty('--mx', '0px');
+        el.style.setProperty('--my', '0px');
+      });
+    });
+  }
+
+  /* ---------------------------------------------------------
      Scroll reveal via IntersectionObserver.
      Respects prefers-reduced-motion by revealing everything
      immediately instead of animating it in.
   --------------------------------------------------------- */
-  var prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  ).matches;
-
+  var prefersReducedMotion = prefersReducedMotionEarly;
   var revealEls = document.querySelectorAll('.reveal');
 
   if (prefersReducedMotion || !('IntersectionObserver' in window)) {
