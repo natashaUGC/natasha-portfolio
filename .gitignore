@@ -1,0 +1,14 @@
+# Secrets — never commit real environment files
+.env
+.env.local
+.env.*.local
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Dependencies (only relevant if you later add a build step)
+node_modules/
+dist/

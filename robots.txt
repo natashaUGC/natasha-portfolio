@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://REEMPLAZAR-USUARIO.github.io/sitemap.xml
