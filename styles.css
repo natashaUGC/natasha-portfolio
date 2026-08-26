@@ -355,6 +355,14 @@ button:focus-visible,
    About
    ========================================================= */
 .about-grid { display: grid; gap: 2.5rem; }
+.about-grid .section-head { grid-column: 1 / -1; }
+.about-photo {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius);
+  will-change: transform;
+}
+.about-photo img { width: 100%; height: 100%; object-fit: cover; }
 .about-facts {
   margin-top: 2rem;
   display: grid;
@@ -372,7 +380,7 @@ button:focus-visible,
 .fact dd { margin: 0; }
 
 @media (min-width: 860px) {
-  .about-grid { grid-template-columns: 0.9fr 1.4fr; align-items: start; }
+  .about-grid { grid-template-columns: 0.8fr 1.4fr; align-items: start; }
 }
 
 /* =========================================================
@@ -428,14 +436,21 @@ button:focus-visible,
   scroll-snap-align: start;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
+  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
+.reel-card:hover { transform: translateY(-4px); border-color: var(--color-secondary); }
 .phone-mock {
   aspect-ratio: 9 / 16;
   background: linear-gradient(165deg, var(--color-primary), var(--color-primary-dark));
   display: flex; align-items: center; justify-content: center;
   border-radius: var(--radius);
+  overflow: hidden;
 }
-.phone-mock-icon { font-size: 2.75rem; }
+.phone-mock-icon {
+  font-size: 2.75rem;
+  transition: transform var(--dur) var(--ease);
+}
+.reel-card:hover .phone-mock-icon { transform: scale(1.15); }
 .reel-card h3 { padding: 1rem 1.1rem 0.25rem; font-size: var(--fs-h3); }
 .reel-card p { padding: 0 1.1rem 1.25rem; color: var(--color-muted); font-size: 0.92rem; }
 
@@ -457,9 +472,33 @@ button:focus-visible,
 .social-list a { display: inline-flex; align-items: center; gap: 0.6rem; }
 .social-icon { color: var(--color-secondary); }
 
-@media (min-width: 860px) {
-  .contact-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 2rem; align-items: end; }
+.contact-photo {
+  aspect-ratio: 4 / 5;
+  max-width: 320px;
+  overflow: hidden;
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+  will-change: transform;
 }
+.contact-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+@media (min-width: 860px) {
+  .contact-grid { display: grid; grid-template-columns: 0.8fr 1.4fr; gap: 3rem; align-items: center; }
+  .contact-photo { margin-bottom: 0; max-width: none; }
+}
+
+/* Portfolio "real content" links */
+.portfolio-links { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border); }
+.link-list { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; }
+.link-list a {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  color: var(--color-primary);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 2px;
+  transition: border-color var(--dur) var(--ease), gap var(--dur) var(--ease);
+}
+.link-list a:hover,
+.link-list a:focus-visible { border-color: var(--color-primary); gap: 0.6rem; }
 
 /* =========================================================
    Footer
@@ -477,18 +516,102 @@ button:focus-visible,
 .footer-copyright { font-size: var(--fs-small); color: rgba(251,246,244,0.5); margin-bottom: 0; }
 
 /* =========================================================
+   Hero name — letter reveal (JS splits text into .letter spans)
+   ========================================================= */
+.hero-name-line { display: block; overflow: hidden; }
+.letter {
+  display: inline-block;
+  transform: translateY(115%);
+  opacity: 0;
+}
+.js-enabled .letter {
+  animation: letter-in 900ms var(--ease) forwards;
+  animation-delay: calc(var(--i, 0) * 32ms + 150ms);
+}
+@keyframes letter-in {
+  to { transform: translateY(0); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .letter { transform: none; opacity: 1; animation: none; }
+}
+
+/* =========================================================
+   Marquee — infinite ticker strip between Hero and About
+   ========================================================= */
+.marquee {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--color-accent);
+  border-bottom: 1px solid var(--color-accent);
+}
+.marquee-track {
+  display: inline-flex;
+  width: max-content;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  animation: marquee-scroll 22s linear infinite;
+}
+.marquee-track span { padding-right: 0; }
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .marquee-track span:last-child { display: none; }
+}
+
+/* =========================================================
+   Tilt (mouse-driven 3D tilt on hero portrait / photos — JS sets
+   --rx / --ry custom properties; no-op without JS or with
+   prefers-reduced-motion)
+   ========================================================= */
+[data-tilt] {
+  --rx: 0deg;
+  --ry: 0deg;
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 400ms var(--ease);
+}
+
+/* =========================================================
+   Magnetic buttons (JS nudges via --mx / --my custom properties)
+   ========================================================= */
+[data-magnetic] {
+  --mx: 0px;
+  --my: 0px;
+  /* Uses the standalone `translate` property (not `transform`) so it
+     composes cleanly with .btn:hover's transform: translateY(-2px)
+     instead of one overwriting the other. */
+  translate: var(--mx) var(--my);
+  transition: translate 250ms var(--ease);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-magnetic] { translate: none !important; }
+}
+
+/* =========================================================
    Scroll reveal (progressive enhancement — JS adds .is-visible)
    ========================================================= */
+/*
+  Uses the standalone `translate` property rather than `transform`,
+  deliberately: several revealed elements (about-photo, contact-photo)
+  also carry [data-tilt], which animates `transform`. Splitting the two
+  keeps the slide-in and the hover-tilt from fighting over one property.
+*/
 .reveal {
   opacity: 1;
-  transform: none;
+  translate: 0 0;
 }
 .js-enabled .reveal {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+  translate: 0 18px;
+  transition: opacity 700ms var(--ease), translate 700ms var(--ease);
 }
 .js-enabled .reveal.is-visible {
   opacity: 1;
-  transform: none;
+  translate: 0 0;
 }
