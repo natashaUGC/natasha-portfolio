@@ -1,1 +1,44 @@
-name: Deploy to GitHub Pages on: push: branches: ["main"] workflow_dispatch: permissions: contents: read pages: write id-token: write concurrency: group: "pages" cancel-in-progress: false jobs: deploy: environment: name: github-pages url: ${{ steps.deployment.outputs.page_url }} runs-on: ubuntu-latest steps: - name: Checkout uses: actions/checkout@v4 - name: Setup Pages uses: actions/configure-pages@v5 - name: Upload artifact uses: actions/upload-pages-artifact@v3 with: path: "." - name: Deploy to GitHub Pages id: deployment uses: actions/deploy-pages@v4
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+# Least privilege: this workflow only needs to read the repo and
+# publish to Pages. Never grant write-all.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deployment at a time; cancel superseded runs, never a
+# deployment already in progress.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      # Pinned to a specific major version from the official actions org.
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # This is a static site with no build step — the whole repo
+      # root is the publishable artifact.
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
