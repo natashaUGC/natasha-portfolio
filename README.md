@@ -1,24 +1,6 @@
 # NE Studio — Portafolio de Natasha Esparza
 
-Sitio web personal, estático (HTML + CSS + JS puro, sin build ni
-backend), pensado para GitHub Pages. Funciona como extensión de su
-CV/LinkedIn: no repite el CV, muestra quién es, qué hace y cómo
-contactarla.
-
-## Identidad del sitio
-
-Se proponen tres alternativas de nombre/identidad para el sitio;
-se seleccionó la primera y ya está aplicada en el código (`<title>`,
-favicon, marca del header/footer):
-
-1. **NE Studio** *(seleccionada)* — sofisticado, funciona como
-   monograma de favicon ("NE") y como nombre de marca independiente
-   del formato "Portfolio de [Nombre]".
-2. Esparza Creative
-3. Natasha Esparza — UGC & Brand Content
-
-Para cambiarla, edita `brand-mark` / `brand-name` en `index.html` y
-el `<title>`.
+Hola! Este es mi Sitio Web
 
 ## Estructura del proyecto
 
@@ -40,70 +22,6 @@ el `<title>`.
 No hay `src/`, `node_modules/` ni paso de build: es HTML/CSS/JS que
 el navegador ejecuta directamente. Esto reduce la superficie de
 ataque (sin dependencias npm que auditar) y simplifica el deploy.
-
-## Cómo ver el sitio localmente
-
-No requiere instalación. Dos opciones:
-
-1. Abrir `index.html` directamente en el navegador, o
-2. Servirlo con un servidor local simple (recomendado, más fiel a
-   producción):
-   ```bash
-   python3 -m http.server 8000
-   # abre http://localhost:8000
-   ```
-
-## Cómo publicarlo en GitHub Pages
-
-1. Crea un repositorio en GitHub (por ejemplo `tu-usuario.github.io`
-   para que quede en la raíz, o cualquier nombre para que quede en
-   `tu-usuario.github.io/nombre-repo`).
-2. Sube todo el contenido de esta carpeta a la rama `main`.
-3. En **Settings → Pages**, en "Build and deployment" selecciona
-   **GitHub Actions** (el workflow incluido en
-   `.github/workflows/deploy.yml` se encarga del resto).
-4. Cada `push` a `main` publica el sitio automáticamente.
-5. Actualiza `REEMPLAZAR-USUARIO` en `index.html` (canonical, Open
-   Graph), `robots.txt` y `sitemap.xml` con la URL real una vez que
-   la conozcas.
-
-Alternativa sin Actions: en **Settings → Pages** también puedes
-elegir "Deploy from a branch" → `main` → `/ (root)`. Funciona igual
-de bien para un sitio sin build; el workflow es opcional.
-
-## Cómo cambiar la información personal
-
-Toda la información editable vive directamente en `index.html`,
-buscable por estos marcadores entre corchetes:
-
-- `[UNIVERSIDAD]`
-- `[PERIODO]`
-- `[DESCRIPCIÓN BREVE / CURSOS RELEVANTES]`
-
-Reemplázalos por la información real cuando esté disponible. No se
-inventó ninguna universidad, empresa, premio ni cifra: todo lo que
-no estaba confirmado quedó como placeholder.
-
-## Cómo cambiar las imágenes
-
-Ver `assets/images/README.txt`. En resumen:
-
-- `assets/images/hero-portrait.jpg` → foto principal en el Hero.
-- `assets/images/og-cover.jpg` → imagen que aparece al compartir el
-  link en redes/WhatsApp (1200×630px recomendado).
-
-Si el archivo no existe, el sitio no se rompe: hay una alternativa
-visual automática (monograma) para que nunca se vea un ícono roto.
-
-## Cómo cambiar las redes sociales
-
-En `index.html`, sección `#contact` y en el `<footer>`, reemplaza:
-
-- `https://instagram.com/REEMPLAZAR`
-- `https://www.tiktok.com/@REEMPLAZAR`
-
-El correo (`natasha.esparza.ugc@gmail.com`) ya está enlazado con
-`mailto:` — no requiere backend ni formulario.
 
 ## Seguridad — qué se implementó y por qué
 
